@@ -1,5 +1,6 @@
 {
   "HomePage": {
+
     "title": "",
     "description": "",
     "button": ""
@@ -21,5 +22,6 @@
       "title": "Sobre",
       "body": "Olá! Meu nome é Pedro, sou UX/UI Designer e Desenvolvedor Frontend, com foco em projetar e construir produtos digitais.\n\nHá mais de 4 anos trabalho entre design e desenvolvimento, criando sites, aplicações web, dashboards, interfaces SaaS e outras experiências digitais. Meu trabalho combina um forte olhar para UI/UX com experiência prática em código, permitindo que eu transite desde a concepção e prototipação de uma interface até sua implementação como um produto funcional.\n\nNo desenvolvimento, trabalho principalmente com React, Next.js, TypeScript, JavaScript e Tailwind CSS, além de experiência com integração de APIs e desenvolvimento full-stack quando necessário.\n\nNa área de design, trabalho com Figma e tenho interesse especial em UI Design, UX, Design Systems, interação, hierarquia visual e criação de interfaces que sejam funcionais e visualmente refinadas.\n\nGosto especialmente de atuar na interseção entre design e tecnologia: entender um problema, estruturar uma experiência, projetar a interface e transformá-la em um produto real e funcional."
     }
+
   }
 }

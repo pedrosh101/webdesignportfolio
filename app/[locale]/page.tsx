@@ -1,18 +1,25 @@
-
-import {getTranslations} from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
+import PortfolioClient from '@/components/Portfolio/PortfolioClient';
 
 export default async function HomePage() {
-  const t = await getTranslations('HomePage');
+  const t = await getTranslations('Portfolio');
 
-  return (
-    <main>
-      <h1>{t('title')}</h1>
+  const copy = {
+    name: t('name'),
+    tagline: t('tagline'),
+    saibaMais: t('saibaMais'),
+    comingSoon: t('comingSoon'),
+    visitProject: t('visitProject'),
+    social: {
+      instagram: t('social.instagram'),
+      youtube: t('social.youtube'),
+      linkedin: t('social.linkedin'),
+    },
+    about: {
+      title: t('about.title'),
+      body: t('about.body'),
+    },
+  };
 
-      <p>{t('description')}</p>
-
-      <button>
-        {t('button')}
-      </button>
-    </main>
-  );
+  return <PortfolioClient copy={copy} />;
 }

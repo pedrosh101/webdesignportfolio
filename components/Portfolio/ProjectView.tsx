@@ -15,16 +15,11 @@ function BlockRenderer({ block, locale }: { block: Block; locale: Locale }) {
         </h3>
       );
 
-    case "intro":
-      return (
-        <p className="text-base leading-relaxed text-[#3a372f] m-0 w-full">
-          {block.text[locale]}
-        </p>
-      );
+
 
     case "paragraph":
       return (
-        <p className="max-w-[62ch] text-base leading-relaxed text-[#3a372f] m-0">
+        <p className="2xl:max-w-[102ch] w-full text-base leading-relaxed text-[#3a372f] m-0">
           {block.text[locale]}
         </p>
       );

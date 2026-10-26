@@ -298,6 +298,16 @@ export const categories: Category[] = [
               pt: 'Abordei o projeto como um produto, e não apenas como um dashboard visual. A interface é organizada em torno de questões importantes do negócio, como receita, crescimento de clientes, assinaturas, despesas e churn. Filtros, visualização de dados e informações contextuais trabalham juntos para permitir que o usuário saia de uma visão geral e avance para informações mais detalhadas.',
             },
           },
+                    {
+            type: 'image',
+            image: {
+              src: '/projects/temp.jpg',
+              alt: {
+                en: 'Kipia analytics dashboard',
+                pt: 'Dashboard de analytics do Kipia',
+              },
+            },
+          },
           {
             type: 'heading',
             text: {

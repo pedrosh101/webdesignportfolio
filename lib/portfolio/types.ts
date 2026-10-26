@@ -12,7 +12,6 @@ export type ImageRef = {
 
 export type Block =
   | { type: 'heading'; text: Localized }
-  | { type: 'intro'; text: Localized }
   | { type: 'paragraph'; text: Localized }
   | { type: 'quote'; text: Localized }
   | { type: 'image'; image: ImageRef }

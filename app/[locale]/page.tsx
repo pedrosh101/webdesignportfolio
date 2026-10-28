@@ -10,6 +10,9 @@ export default async function HomePage() {
     saibaMais: t('saibaMais'),
     comingSoon: t('comingSoon'),
     visitProject: t('visitProject'),
+    inProgress: t('inProgress'),
+    menu: t('menu'),
+    close: t('close'),
     social: {
       instagram: t('social.instagram'),
       youtube: t('social.youtube'),

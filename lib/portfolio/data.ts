@@ -8,6 +8,8 @@ export const categories: Category[] = [
       {
         slug: 'ato',
         year: 2026,
+        inProgress: true,
+        link: 'https://ato-artivista.netlify.app/',
         title: 'ATO',
         summary: {
           en: 'Replace with a one-line summary of this project.',
@@ -48,6 +50,7 @@ export const categories: Category[] = [
       {
         slug: 'pink-molotov',
         year: 2026,
+        inProgress: true,
         title: 'Pink Molotov',
         summary: {
           en: 'Replace with a one-line summary of this project.',
@@ -159,7 +162,7 @@ export const categories: Category[] = [
 
         tags: ['UX/UI', 'Figma', 'Next.js', 'Front-end'],
         link: 'https://estudiomasca.com/',
-        blocks: [
+                blocks: [
           {
             type: 'paragraph',
             text: {
@@ -240,6 +243,8 @@ export const categories: Category[] = [
         slug: 'kipia',
         year: 2026,
         title: 'Kipia',
+        link: 'https://kipiametrics.netlify.app/',
+        
         summary: {
           en: 'B2B analytics platform designed to help small businesses understand their financial and operational performance.',
           pt: 'Plataforma de analytics B2B desenvolvida para ajudar pequenas empresas a entender melhor seu desempenho financeiro e operacional.',
@@ -256,18 +261,28 @@ export const categories: Category[] = [
           {
             type: 'paragraph',
             text: {
-              en: 'Kipia is a B2B analytics platform concept designed around a simple idea: business data should help people make decisions, not just fill dashboards. The project explores how financial and operational information can be organized into a clear, useful and scalable product experience.',
-              pt: 'Kipia é um conceito de plataforma de analytics B2B criado a partir de uma ideia simples: dados de negócio devem ajudar na tomada de decisões, e não apenas preencher dashboards. O projeto explora como informações financeiras e operacionais podem ser organizadas em uma experiência clara, útil e escalável.',
+              en: 'Kipia is a B2B analytics platform concept designed around a simple idea: business data should help people make decisions, not just fill dashboards. The project, developed in a very informal manner, with its first commit in 2024, explores how financial and operational information can be organized into a clear, useful, and scalable experience.',
+              pt: 'Kipia é um conceito de plataforma de analytics B2B criado a partir de uma ideia simples: dados de negócio devem ajudar na tomada de decisões, e não apenas preencher dashboards. O projeto, que foi desenvolido de maneira bem casual tendo seu primeiro commit em 2024, explora como informações financeiras e operacionais podem ser organizadas em uma experiência clara, útil e escalável.',
             },
           },
           {
-            type: 'image',
-            image: {
-              src: '/projects/temp.jpg',
-              alt: {
-                en: 'Kipia analytics dashboard',
-                pt: 'Dashboard de analytics do Kipia',
+            type: 'imageGrid',
+            images: [
+              {
+                src: '/projects/kipia/1.png',
+                alt: { en: 'Projeto 2 screenshot 1', pt: 'Captura de tela 1 do Projeto 2' },
               },
+              {
+                src: '/projects/kipia/2.png',
+                alt: { en: 'Projeto 2 screenshot 2', pt: 'Captura de tela 2 do Projeto 2' },
+              },
+            ],
+          },
+                    {
+            type: 'quote',
+            text: {
+              en: 'Replace with a client quote or a key takeaway from the project — optional.',
+              pt: 'fig.1 Logo - fig.2 Sketch no Figma',
             },
           },
           {

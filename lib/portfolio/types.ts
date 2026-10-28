@@ -24,6 +24,8 @@ export type Project = {
   summary: Localized;
   tags?: string[];
   link?: string;
+  /** Mostra o selo "em construção" no topo do projeto. */
+  inProgress?: boolean;
   blocks: Block[];
 };
 

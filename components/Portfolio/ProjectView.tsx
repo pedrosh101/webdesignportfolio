@@ -132,7 +132,7 @@ export default function ProjectView({
         </a>
       )}
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 pb-8">
         {project.blocks.map((block, i) => (
           <BlockRenderer block={block} locale={locale} key={i} />
         ))}

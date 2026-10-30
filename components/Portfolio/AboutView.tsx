@@ -28,11 +28,11 @@ export default function AboutView({
 
         <div className="relative aspect-square w-full md:w-1/2 shrink-0 md:sticky md:top-4">
           <Image
-            src="/projects/picture.jpg"
+            src="/projects/profile.jpg"
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover grayscale"
+            className="object-cover"
             priority
           />
         </div>

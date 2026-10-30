@@ -12,7 +12,7 @@ export default function LanguageSwitcher() {
 
   function changeLocale(newLocale: (typeof LOCALES)[number]) {
     const pathWithoutLocale = pathname.replace(/^\/(pt|en)(?=\/|$)/, '');
-    router.replace(`/${newLocale}${pathWithoutLocale || '/'}`);
+    router.replace(`/${newLocale}${pathWithoutLocale || '/'}${window.location.hash}`);
   }
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useSyncExternalStore } from "react";
 import { useLocale } from "next-intl";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { categories } from "@/lib/portfolio/data";
@@ -29,6 +29,22 @@ type Copy = {
   about: { title: string; body: string };
 };
 
+// A tela aberta (projeto ou "sobre") vive no hash da URL: /pt#ally-ribeiro, /pt#about.
+// Assim ela sobrevive à troca de idioma (que remonta a página), ao F5 e vira link direto.
+function subscribeToHash(callback: () => void) {
+  window.addEventListener("hashchange", callback);
+  return () => window.removeEventListener("hashchange", callback);
+}
+const getHash = () => window.location.hash.slice(1);
+const getServerHash = () => "";
+
+function parseView(hash: string): View {
+  if (hash === "about") return { type: "about" };
+  const slug = decodeURIComponent(hash);
+  const exists = categories.some((c) => c.projects.some((p) => p.slug === slug));
+  return exists ? { type: "project", slug } : { type: "idle" };
+}
+
 function Tagline({
   tagline,
   saibaMais,
@@ -55,9 +71,24 @@ function Tagline({
 
 export default function PortfolioClient({ copy }: { copy: Copy }) {
   const locale = useLocale() as Locale;
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
-  const [view, setView] = useState<View>({ type: "idle" });
+  const hash = useSyncExternalStore(subscribeToHash, getHash, getServerHash);
+  const view = parseView(hash);
+  const activeSlug = view.type === "project" ? view.slug : null;
+  const activeCategoryKey = activeSlug
+    ? categories.find((c) => c.projects.some((p) => p.slug === activeSlug))?.key ?? null
+    : null;
+
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(
+    activeCategoryKey,
+  );
   const [menuOpen, setMenuOpen] = useState(false);
+
+
+  const [syncedCategoryKey, setSyncedCategoryKey] = useState(activeCategoryKey);
+  if (syncedCategoryKey !== activeCategoryKey) {
+    setSyncedCategoryKey(activeCategoryKey);
+    if (activeCategoryKey) setExpandedCategory(activeCategoryKey);
+  }
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -65,13 +96,13 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
     setExpandedCategory((current) => (current === key ? null : key));
   }
 
-  function showView(next: View) {
-    setView(next);
+  function showView(next: Exclude<View, { type: "idle" }>) {
+    window.location.hash =
+      next.type === "about" ? "about" : encodeURIComponent(next.slug);
     setMenuOpen(false);
     window.scrollTo({ top: 0 });
   }
 
-  const activeSlug = view.type === "project" ? view.slug : null;
   const activeProject = activeSlug
     ? categories.flatMap((c) => c.projects).find((p) => p.slug === activeSlug)
     : null;
@@ -87,7 +118,7 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
 
   return (
     <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-10 m-5 min-h-[calc(100dvh-40px)] text-black">
-      {/* Mobile: barra de topo com o botão do menu lateral */}
+
       <header className="flex items-center justify-between gap-4 md:hidden">
         <h1 className="text-base font-medium m-0">{copy.name}</h1>
         <button
@@ -113,7 +144,6 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
         </button>
       </header>
 
-      {/* Mobile: apresentação só na home */}
       {view.type === "idle" && (
         <div className="md:hidden">
           <Tagline
@@ -124,7 +154,7 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
         </div>
       )}
 
-      {/* Desktop: sidebar fixa */}
+
       <aside className="hidden md:flex flex-col w-85 shrink-0 h-[calc(100vh-40px)] sticky top-5 overflow-y-auto">
         <div className="flex flex-col gap-3">
           <div className="flex items-baseline justify-between gap-4">
@@ -159,12 +189,11 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
         )}
       </main>
 
-      {/* Mobile: redes sociais no fim da página */}
+
       <footer className="md:hidden mt-auto pt-6">
         <SocialLinks social={copy.social} />
       </footer>
 
-      {/* Mobile: menu lateral com idioma + navegação */}
       <MobileMenu
         open={menuOpen}
         onClose={closeMenu}

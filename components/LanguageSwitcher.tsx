@@ -1,18 +1,19 @@
 'use client';
 
 import {useLocale} from 'next-intl';
-import {usePathname, useRouter} from 'next/navigation';
+import {usePathname, useRouter} from '@/i18n/navigation';
+import {routing} from '@/i18n/routing';
 
-const LOCALES = ['pt', 'en'] as const;
+const LOCALES = routing.locales;
 
 export default function LanguageSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
 
+  // Mesma página, outro idioma: /pt/projects/ato -> /en/projects/ato.
   function changeLocale(newLocale: (typeof LOCALES)[number]) {
-    const pathWithoutLocale = pathname.replace(/^\/(pt|en)(?=\/|$)/, '');
-    router.replace(`/${newLocale}${pathWithoutLocale || '/'}${window.location.hash}`);
+    router.replace(pathname, {locale: newLocale});
   }
 
   return (

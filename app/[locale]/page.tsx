@@ -1,28 +1,11 @@
-import { getTranslations } from 'next-intl/server';
-import PortfolioClient from '@/components/Portfolio/PortfolioClient';
+import { setRequestLocale } from 'next-intl/server';
 
-export default async function HomePage() {
-  const t = await getTranslations('Portfolio');
+type Props = { params: Promise<{ locale: string }> };
 
-  const copy = {
-    name: t('name'),
-    tagline: t('tagline'),
-    saibaMais: t('saibaMais'),
-    comingSoon: t('comingSoon'),
-    visitProject: t('visitProject'),
-    inProgress: t('inProgress'),
-    menu: t('menu'),
-    close: t('close'),
-    social: {
-      instagram: t('social.instagram'),
-      youtube: t('social.youtube'),
-      linkedin: t('social.linkedin'),
-    },
-    about: {
-      title: t('about.title'),
-      body: t('about.body'),
-    },
-  };
+// Home: o painel da direita fica vazio; a sidebar (layout.tsx) já tem tudo.
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
 
-  return <PortfolioClient copy={copy} />;
+  return null;
 }

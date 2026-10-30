@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/navigation";
 import { categories } from "@/lib/portfolio/data";
 import { resolveLocalized, type Locale } from "@/lib/portfolio/types";
 
@@ -7,7 +8,8 @@ type Props = {
   activeSlug: string | null;
   comingSoon: string;
   onToggleCategory: (key: string) => void;
-  onSelectProject: (slug: string) => void;
+  /** Chamado ao clicar num projeto (fecha o menu mobile, volta ao topo). */
+  onNavigate: () => void;
   className?: string;
 };
 
@@ -17,7 +19,7 @@ export default function NavList({
   activeSlug,
   comingSoon,
   onToggleCategory,
-  onSelectProject,
+  onNavigate,
   className = "",
 }: Props) {
   return (
@@ -44,20 +46,22 @@ export default function NavList({
                     const isActive = activeSlug === project.slug;
                     return (
                       <li key={project.slug}>
-                        <button
-                          type="button"
+                        <Link
+                          href={`/projects/${project.slug}`}
+                          scroll={false}
+                          onClick={onNavigate}
+                          aria-current={isActive ? "page" : undefined}
                           className={`appearance-none bg-transparent border-none w-full flex items-baseline justify-between gap-3 py-2 md:py-1 font-inherit text-[15px] cursor-pointer ${
                             isActive
                               ? "not-italic font-medium"
                               : "text-[#4a473f] hover:italic hover:text-neutral-900"
                           }`}
-                          onClick={() => onSelectProject(project.slug)}
                         >
                           <span>{resolveLocalized(project.title, locale)}</span>
                           <span className="text-[#8a8578] text-sm">
                             {project.year}
                           </span>
-                        </button>
+                        </Link>
                       </li>
                     );
                   })

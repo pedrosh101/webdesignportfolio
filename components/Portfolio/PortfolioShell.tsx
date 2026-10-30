@@ -1,79 +1,69 @@
 "use client";
 
-import { useCallback, useState, useSyncExternalStore } from "react";
+import { useCallback, useState, type ReactNode } from "react";
 import { useLocale } from "next-intl";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { Link, usePathname } from "@/i18n/navigation";
 import { categories } from "@/lib/portfolio/data";
 import type { Locale } from "@/lib/portfolio/types";
-import ProjectView from "./ProjectView";
-import AboutView from "./AboutView";
 import NavList from "./NavList";
 import SocialLinks from "./SocialLinks";
 import MobileMenu from "./MobileMenu";
-
-type View =
-  | { type: "idle" }
-  | { type: "about" }
-  | { type: "project"; slug: string };
 
 type Copy = {
   name: string;
   tagline: string;
   saibaMais: string;
   comingSoon: string;
-  visitProject: string;
-  inProgress: string;
   menu: string;
   close: string;
+  aboutLabel: string;
   social: { instagram: string; youtube: string; linkedin: string };
-  about: { title: string; body: string };
 };
-
-// A tela aberta (projeto ou "sobre") vive no hash da URL: /pt#ally-ribeiro, /pt#about.
-// Assim ela sobrevive à troca de idioma (que remonta a página), ao F5 e vira link direto.
-function subscribeToHash(callback: () => void) {
-  window.addEventListener("hashchange", callback);
-  return () => window.removeEventListener("hashchange", callback);
-}
-const getHash = () => window.location.hash.slice(1);
-const getServerHash = () => "";
-
-function parseView(hash: string): View {
-  if (hash === "about") return { type: "about" };
-  const slug = decodeURIComponent(hash);
-  const exists = categories.some((c) => c.projects.some((p) => p.slug === slug));
-  return exists ? { type: "project", slug } : { type: "idle" };
-}
 
 function Tagline({
   tagline,
   saibaMais,
-  onAbout,
+  onNavigate,
 }: {
   tagline: string;
   saibaMais: string;
-  onAbout: () => void;
+  onNavigate: () => void;
 }) {
   return (
     <p className="text-sm leading-relaxed m-0 text-black/80">
       {tagline}
       <br />
-      <button
-        type="button"
-        className="appearance-none bg-transparent border-none p-0 font-inherit text-sm text-black/80 cursor-pointer hover:italic"
-        onClick={onAbout}
+      <Link
+        href="/about"
+        scroll={false}
+        onClick={onNavigate}
+        className="text-sm text-black/80 hover:italic"
       >
         {saibaMais}
-      </button>
+      </Link>
     </p>
   );
 }
 
-export default function PortfolioClient({ copy }: { copy: Copy }) {
+/**
+ * Moldura do site: sidebar (desktop), barra de topo + menu lateral (mobile) e rodapé.
+ * Vive no layout, então não desmonta ao navegar; o conteúdo da página entra em {children}.
+ */
+export default function PortfolioShell({
+  copy,
+  children,
+}: {
+  copy: Copy;
+  children: ReactNode;
+}) {
   const locale = useLocale() as Locale;
-  const hash = useSyncExternalStore(subscribeToHash, getHash, getServerHash);
-  const view = parseView(hash);
-  const activeSlug = view.type === "project" ? view.slug : null;
+
+  // A tela aberta vem da URL: "/", "/about" ou "/projects/[slug]" (sem o prefixo de idioma).
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const isAbout = pathname === "/about";
+  const activeSlug = pathname.match(/^\/projects\/([^/]+)/)?.[1] ?? null;
   const activeCategoryKey = activeSlug
     ? categories.find((c) => c.projects.some((p) => p.slug === activeSlug))?.key ?? null
     : null;
@@ -83,11 +73,19 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
   );
   const [menuOpen, setMenuOpen] = useState(false);
 
-
+  // Quando o projeto ativo muda de categoria (voltar do navegador, troca de idioma,
+  // link direto), abre a categoria dele.
   const [syncedCategoryKey, setSyncedCategoryKey] = useState(activeCategoryKey);
   if (syncedCategoryKey !== activeCategoryKey) {
     setSyncedCategoryKey(activeCategoryKey);
     if (activeCategoryKey) setExpandedCategory(activeCategoryKey);
+  }
+
+  // Fecha o menu mobile sempre que a página muda (inclusive voltar/avançar do navegador).
+  const [menuPathname, setMenuPathname] = useState(pathname);
+  if (menuPathname !== pathname) {
+    setMenuPathname(pathname);
+    setMenuOpen(false);
   }
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
@@ -96,16 +94,13 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
     setExpandedCategory((current) => (current === key ? null : key));
   }
 
-  function showView(next: Exclude<View, { type: "idle" }>) {
-    window.location.hash =
-      next.type === "about" ? "about" : encodeURIComponent(next.slug);
+  // Clique em qualquer link de navegação: fecha o menu mobile e volta ao topo da
+  // página, para o projeto novo sempre começar do início. (Os Links usam scroll={false}
+  // porque o scroll padrão do Next alinha o topo do conteúdo, sem a margem de 20px.)
+  function handleNavigate() {
     setMenuOpen(false);
     window.scrollTo({ top: 0 });
   }
-
-  const activeProject = activeSlug
-    ? categories.flatMap((c) => c.projects).find((p) => p.slug === activeSlug)
-    : null;
 
   const navProps = {
     locale,
@@ -113,7 +108,7 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
     activeSlug,
     comingSoon: copy.comingSoon,
     onToggleCategory: toggleCategory,
-    onSelectProject: (slug: string) => showView({ type: "project", slug }),
+    onNavigate: handleNavigate,
   };
 
   return (
@@ -144,12 +139,12 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
         </button>
       </header>
 
-      {view.type === "idle" && (
+      {isHome && (
         <div className="md:hidden">
           <Tagline
             tagline={copy.tagline}
             saibaMais={copy.saibaMais}
-            onAbout={() => showView({ type: "about" })}
+            onNavigate={handleNavigate}
           />
         </div>
       )}
@@ -165,7 +160,7 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
           <Tagline
             tagline={copy.tagline}
             saibaMais={copy.saibaMais}
-            onAbout={() => showView({ type: "about" })}
+            onNavigate={handleNavigate}
           />
         </div>
 
@@ -174,20 +169,7 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
         <SocialLinks social={copy.social} className="mt-auto pt-10" />
       </aside>
 
-      <main className="flex-1 min-w-0">
-        {view.type === "project" && activeProject && (
-          <ProjectView
-            project={activeProject}
-            locale={locale}
-            visitLabel={copy.visitProject}
-            inProgressLabel={copy.inProgress}
-          />
-        )}
-
-        {view.type === "about" && (
-          <AboutView title={copy.about.title} body={copy.about.body} />
-        )}
-      </main>
+      <main className="flex-1 min-w-0">{children}</main>
 
 
       <footer className="md:hidden mt-auto pt-6">
@@ -201,17 +183,19 @@ export default function PortfolioClient({ copy }: { copy: Copy }) {
         closeLabel={copy.close}
         header={<LanguageSwitcher />}
       >
-        <button
-          type="button"
-          onClick={() => showView({ type: "about" })}
+        <Link
+          href="/about"
+          scroll={false}
+          onClick={handleNavigate}
+          aria-current={isAbout ? "page" : undefined}
           className={`appearance-none bg-transparent w-fit border-none py-2.5 text-left font-inherit text-base cursor-pointer ${
-            view.type === "about"
+            isAbout
               ? "text-black not-italic font-medium"
               : "text-neutral-900 hover:italic"
           }`}
         >
-          {copy.about.title}
-        </button>
+          {copy.aboutLabel}
+        </Link>
         <NavList {...navProps} />
       </MobileMenu>
     </div>

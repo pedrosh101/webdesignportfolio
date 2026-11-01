@@ -8,7 +8,6 @@ type Props = {
   activeSlug: string | null;
   comingSoon: string;
   onToggleCategory: (key: string) => void;
-  /** Chamado ao clicar num projeto (fecha o menu mobile, volta ao topo). */
   onNavigate: () => void;
   className?: string;
 };

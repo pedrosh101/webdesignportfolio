@@ -38,7 +38,7 @@ function Tagline({
         href="/about"
         scroll={false}
         onClick={onNavigate}
-        className="text-sm text-black/80 hover:italic"
+        className="text-sm text-black/80 italic md:not-italic hover:italic"
       >
         {saibaMais}
       </Link>
@@ -46,10 +46,6 @@ function Tagline({
   );
 }
 
-/**
- * Moldura do site: sidebar (desktop), barra de topo + menu lateral (mobile) e rodapé.
- * Vive no layout, então não desmonta ao navegar; o conteúdo da página entra em {children}.
- */
 export default function PortfolioShell({
   copy,
   children,
@@ -59,13 +55,13 @@ export default function PortfolioShell({
 }) {
   const locale = useLocale() as Locale;
 
-  // A tela aberta vem da URL: "/", "/about" ou "/projects/[slug]" (sem o prefixo de idioma).
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isAbout = pathname === "/about";
   const activeSlug = pathname.match(/^\/projects\/([^/]+)/)?.[1] ?? null;
   const activeCategoryKey = activeSlug
-    ? categories.find((c) => c.projects.some((p) => p.slug === activeSlug))?.key ?? null
+    ? (categories.find((c) => c.projects.some((p) => p.slug === activeSlug))
+        ?.key ?? null)
     : null;
 
   const [expandedCategory, setExpandedCategory] = useState<string | null>(
@@ -94,9 +90,6 @@ export default function PortfolioShell({
     setExpandedCategory((current) => (current === key ? null : key));
   }
 
-  // Clique em qualquer link de navegação: fecha o menu mobile e volta ao topo da
-  // página, para o projeto novo sempre começar do início. (Os Links usam scroll={false}
-  // porque o scroll padrão do Next alinha o topo do conteúdo, sem a margem de 20px.)
   function handleNavigate() {
     setMenuOpen(false);
     window.scrollTo({ top: 0 });
@@ -113,9 +106,10 @@ export default function PortfolioShell({
 
   return (
     <div className="flex flex-col md:flex-row md:items-stretch gap-6 md:gap-10 m-5 min-h-[calc(100dvh-40px)] text-black">
-
       <header className="flex items-center justify-between gap-4 md:hidden">
-        <h1 className="text-base font-medium m-0">{copy.name}</h1>
+        <Link href="/">
+          <h1 className="text-base font-medium m-0">{copy.name}</h1>
+        </Link>
         <button
           type="button"
           onClick={() => setMenuOpen(true)}
@@ -146,14 +140,16 @@ export default function PortfolioShell({
             saibaMais={copy.saibaMais}
             onNavigate={handleNavigate}
           />
+          <NavList {...navProps} className="mt-6" />
         </div>
       )}
-
 
       <aside className="hidden md:flex flex-col w-85 shrink-0 h-[calc(100vh-40px)] sticky top-5 overflow-y-auto">
         <div className="flex flex-col gap-3">
           <div className="flex items-baseline justify-between gap-4">
-            <h1 className="text-base font-medium m-0">{copy.name}</h1>
+            <Link href="/">
+              <h1 className="text-base font-medium m-0">{copy.name}</h1>
+            </Link>
             <LanguageSwitcher />
           </div>
 
@@ -170,7 +166,6 @@ export default function PortfolioShell({
       </aside>
 
       <main className="flex-1 min-w-0">{children}</main>
-
 
       <footer className="md:hidden mt-auto pt-6">
         <SocialLinks social={copy.social} />

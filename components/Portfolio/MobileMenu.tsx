@@ -11,7 +11,6 @@ type Props = {
   children: ReactNode;
 };
 
-
 export default function MobileMenu({
   open,
   onClose,

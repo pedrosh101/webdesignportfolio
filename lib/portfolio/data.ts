@@ -5,128 +5,7 @@ export const categories: Category[] = [
     key: "websites",
     label: "Websites",
     projects: [
-      {
-        slug: "descubra-istambul",
-        year: 2026,
-        inProgress: true,
-        link: "https://descubraistambul.netlify.app/",
-        title: "Descubra Istambul",
-        summary: {
-          en: "A multilingual website for a Brazilian licensed tour guide in Türkiye, combining editorial visual identity with immersive interactions.",
-          pt: "Um site multilíngue para uma guia brasileira licenciada na Turquia, combinando identidade visual editorial e interações imersivas.",
-        },
-        tags: ["UX/UI", "Next.js", "TypeScript", "next-intl", "Front-end"],
-        blocks: [
-          {
-            type: "paragraph",
-            text: {
-              en: "Descubra Istambul is a website created for Mariana Humayta, a Brazilian tour guide licensed by the Turkish Ministry of Culture and Tourism. The project aimed to establish a distinctive digital presence that could communicate her expertise, introduce visitors to her work, and reach an international audience.",
-              pt: "O Descubra Istambul é um site desenvolvido para Mariana Humayta, guia brasileira licenciada pelo Ministério da Cultura e Turismo da Turquia. O projeto buscou estabelecer uma presença digital própria, capaz de comunicar sua experiência, apresentar seu trabalho e alcançar um público internacional.",
-            },
-          },
-          {
-            type: "imageGrid",
-            images: [
-              {
-                src: "/projects/descubra/c.webp",
-                alt: {
-                  en: "Descubra Istambul visual identity and color palette",
-                  pt: "Identidade visual e paleta de cores do Descubra Istambul",
-                },
-              },
-              {
-                src: "/projects/descubra/b.webp",
-                alt: {
-                  en: "Descubra Istambul website layout and typography",
-                  pt: "Layout e tipografia do site Descubra Istambul",
-                },
-              },
-            ],
-          },
-
-          {
-            type: "heading",
-            text: {
-              en: "An identity rooted in storytelling",
-              pt: "Uma identidade que parte da história",
-            },
-          },
-          {
-            type: "paragraph",
-            text: {
-              en: "Mariana did not have a clearly established visual identity for her online presence. Rather than creating a visual language from scratch without context, I looked to her published book for inspiration. Its aged-paper tones informed the website’s warm, timeless palette, while red accents referenced the colors of the Turkish flag. The result connects her existing work to a new digital experience.",
-              pt: "Mariana ainda não tinha uma identidade visual bem definida para sua presença online. Em vez de criar uma linguagem visual sem partir de um contexto, busquei inspiração no livro que ela já havia publicado. Os tons que remetem a papéis envelhecidos orientaram uma paleta acolhedora e atemporal, enquanto os acentos vermelhos fazem referência às cores da bandeira turca. Assim, o site conecta seu trabalho existente a uma nova experiência digital.",
-            },
-          },
-          {
-            type: "image",
-            image: {
-              src: "/projects/descubra/a.jpg",
-              alt: {
-                en: "Descubra Istambul website homepage",
-                pt: "Página inicial do site Descubra Istambul",
-              },
-            },
-          },
-          {
-            type: "quote",
-            text: {
-              en: "Basic sketches created in Figma, mainly to serve as a starting point.",
-              pt: "Esboços básicos criados no Figma, mais para ter um ponto de partida.",
-            },
-          },
-          {
-            type: "heading",
-            text: {
-              en: "Designed for an international audience",
-              pt: "Pensado para um público internacional",
-            },
-          },
-          {
-            type: "paragraph",
-            text: {
-              en: "Multilingual support was an important part of the project from the beginning. We discussed the possibility of expanding the website beyond Portuguese, including Italian, which raised questions about how to structure the domain and language experience. I implemented the site using Next.js and next-intl, creating a multilingual experience that supports four languages and makes the content accessible to a broader international audience.",
-              pt: "O suporte a múltiplos idiomas foi uma parte importante do projeto desde o início. Conversamos sobre a possibilidade de expandir o site para além do português, incluindo o italiano, o que trouxe questões sobre como estruturar o domínio e a experiência de navegação. Implementei o site com Next.js e next-intl, criando uma experiência multilíngue que funciona em quatro idiomas e amplia o alcance do conteúdo para um público internacional.",
-            },
-          },
-          {
-            type: "quote",
-            text: {
-              en: "Expanding the website to four languages became an opportunity to make the experience accessible to a broader international audience.",
-              pt: "Ampliar o site para quatro idiomas foi uma oportunidade de tornar a experiência acessível a um público internacional mais amplo.",
-            },
-          },
-          {
-            type: "heading",
-            text: {
-              en: "A more personal visual experience",
-              pt: "Uma experiência visual mais pessoal",
-            },
-          },
-          {
-            type: "paragraph",
-            text: {
-              en: "To make the website feel more authentic and personal, I suggested using photographs and videos Mariana already had on her phone. This approach brought a more organic quality to the content, helping the website feel connected to her own experiences rather than relying entirely on generic travel imagery.",
-              pt: "Para tornar o site mais autêntico e pessoal, sugeri aproveitar fotografias e vídeos que Mariana já tinha no próprio celular. Essa abordagem trouxe um caráter mais orgânico ao conteúdo, aproximando a experiência digital de suas vivências e evitando depender exclusivamente de imagens genéricas de viagem.",
-            },
-          },
-
-          {
-            type: "heading",
-            text: {
-              en: "Bringing movement into the experience",
-              pt: "Movimento como parte da experiência",
-            },
-          },
-          {
-            type: "paragraph",
-            text: {
-              en: "Mariana also wanted a more contemporary browsing experience. I introduced smooth scrolling and parallax effects on images, adding depth and movement without losing sight of the content. These interactions bring a more immersive quality to the website while reinforcing its editorial visual direction.",
-              pt: "Mariana também buscava uma experiência de navegação mais contemporânea. Implementei scroll suave e efeitos de parallax nas imagens, adicionando profundidade e movimento sem tirar o foco do conteúdo. Essas interações tornam a navegação mais imersiva e reforçam a direção visual editorial do site.",
-            },
-          },
-        ],
-      },
+      
 
       {
         slug: "ato",
@@ -282,6 +161,128 @@ export const categories: Category[] = [
             text: {
               en: "The development of ATO is intentionally gradual, following the pace at which the organization’s content and artwork records become available. Rather than treating the website as a static showcase, the project is an ongoing digital platform that brings together institutional communication, artistic documentation and social initiatives. The goal is to create a consistent foundation that can grow alongside the organization and its work.",
               pt: "O desenvolvimento da ATO acontece de forma gradual, acompanhando o ritmo em que os conteúdos da organização e os registros das obras ficam disponíveis. Em vez de tratar o site como uma vitrine estática, o projeto funciona como uma plataforma digital em evolução, reunindo comunicação institucional, documentação artística e iniciativas sociais. A proposta é construir uma base consistente que possa crescer junto com a organização e seu trabalho.",
+            },
+          },
+        ],
+      },
+      {
+        slug: "descubra-istambul",
+        year: 2026,
+        inProgress: false,
+        link: "https://descubraistambul.netlify.app/",
+        title: "Descubra Istambul",
+        summary: {
+          en: "A multilingual website for a Brazilian licensed tour guide in Türkiye, combining editorial visual identity with immersive interactions.",
+          pt: "Um site multilíngue para uma guia brasileira licenciada na Turquia, combinando identidade visual editorial e interações imersivas.",
+        },
+        tags: ["UX/UI", "Next.js", "TypeScript", "next-intl", "Front-end"],
+        blocks: [
+          {
+            type: "paragraph",
+            text: {
+              en: "Descubra Istambul is a website created for Mariana Humayta, a Brazilian tour guide licensed by the Turkish Ministry of Culture and Tourism. The project aimed to establish a distinctive digital presence that could communicate her expertise, introduce visitors to her work, and reach an international audience.",
+              pt: "O Descubra Istambul é um site desenvolvido para Mariana Humayta, guia brasileira licenciada pelo Ministério da Cultura e Turismo da Turquia. O projeto buscou estabelecer uma presença digital própria, capaz de comunicar sua experiência, apresentar seu trabalho e alcançar um público internacional.",
+            },
+          },
+          {
+            type: "imageGrid",
+            images: [
+              {
+                src: "/projects/descubra/c.webp",
+                alt: {
+                  en: "Descubra Istambul visual identity and color palette",
+                  pt: "Identidade visual e paleta de cores do Descubra Istambul",
+                },
+              },
+              {
+                src: "/projects/descubra/b.webp",
+                alt: {
+                  en: "Descubra Istambul website layout and typography",
+                  pt: "Layout e tipografia do site Descubra Istambul",
+                },
+              },
+            ],
+          },
+
+          {
+            type: "heading",
+            text: {
+              en: "An identity rooted in storytelling",
+              pt: "Uma identidade que parte da história",
+            },
+          },
+          {
+            type: "paragraph",
+            text: {
+              en: "Mariana did not have a clearly established visual identity for her online presence. Rather than creating a visual language from scratch without context, I looked to her published book for inspiration. Its aged-paper tones informed the website’s warm, timeless palette, while red accents referenced the colors of the Turkish flag. The result connects her existing work to a new digital experience.",
+              pt: "Mariana ainda não tinha uma identidade visual bem definida para sua presença online. Em vez de criar uma linguagem visual sem partir de um contexto, busquei inspiração no livro que ela já havia publicado. Os tons que remetem a papéis envelhecidos orientaram uma paleta acolhedora e atemporal, enquanto os acentos vermelhos fazem referência às cores da bandeira turca. Assim, o site conecta seu trabalho existente a uma nova experiência digital.",
+            },
+          },
+          {
+            type: "image",
+            image: {
+              src: "/projects/descubra/a.jpg",
+              alt: {
+                en: "Descubra Istambul website homepage",
+                pt: "Página inicial do site Descubra Istambul",
+              },
+            },
+          },
+          {
+            type: "quote",
+            text: {
+              en: "Basic sketches created in Figma, mainly to serve as a starting point.",
+              pt: "Esboços básicos criados no Figma, mais para ter um ponto de partida.",
+            },
+          },
+          {
+            type: "heading",
+            text: {
+              en: "Designed for an international audience",
+              pt: "Pensado para um público internacional",
+            },
+          },
+          {
+            type: "paragraph",
+            text: {
+              en: "Multilingual support was an important part of the project from the beginning. We discussed the possibility of expanding the website beyond Portuguese, including Italian, which raised questions about how to structure the domain and language experience. I implemented the site using Next.js and next-intl, creating a multilingual experience that supports four languages and makes the content accessible to a broader international audience.",
+              pt: "O suporte a múltiplos idiomas foi uma parte importante do projeto desde o início. Conversamos sobre a possibilidade de expandir o site para além do português, incluindo o italiano, o que trouxe questões sobre como estruturar o domínio e a experiência de navegação. Implementei o site com Next.js e next-intl, criando uma experiência multilíngue que funciona em quatro idiomas e amplia o alcance do conteúdo para um público internacional.",
+            },
+          },
+          {
+            type: "quote",
+            text: {
+              en: "Expanding the website to four languages became an opportunity to make the experience accessible to a broader international audience.",
+              pt: "Ampliar o site para quatro idiomas foi uma oportunidade de tornar a experiência acessível a um público internacional mais amplo.",
+            },
+          },
+          {
+            type: "heading",
+            text: {
+              en: "A more personal visual experience",
+              pt: "Uma experiência visual mais pessoal",
+            },
+          },
+          {
+            type: "paragraph",
+            text: {
+              en: "To make the website feel more authentic and personal, I suggested using photographs and videos Mariana already had on her phone. This approach brought a more organic quality to the content, helping the website feel connected to her own experiences rather than relying entirely on generic travel imagery.",
+              pt: "Para tornar o site mais autêntico e pessoal, sugeri aproveitar fotografias e vídeos que Mariana já tinha no próprio celular. Essa abordagem trouxe um caráter mais orgânico ao conteúdo, aproximando a experiência digital de suas vivências e evitando depender exclusivamente de imagens genéricas de viagem.",
+            },
+          },
+
+          {
+            type: "heading",
+            text: {
+              en: "Bringing movement into the experience",
+              pt: "Movimento como parte da experiência",
+            },
+          },
+          {
+            type: "paragraph",
+            text: {
+              en: "Mariana also wanted a more contemporary browsing experience. I introduced smooth scrolling and parallax effects on images, adding depth and movement without losing sight of the content. These interactions bring a more immersive quality to the website while reinforcing its editorial visual direction.",
+              pt: "Mariana também buscava uma experiência de navegação mais contemporânea. Implementei scroll suave e efeitos de parallax nas imagens, adicionando profundidade e movimento sem tirar o foco do conteúdo. Essas interações tornam a navegação mais imersiva e reforçam a direção visual editorial do site.",
             },
           },
         ],
@@ -494,14 +495,14 @@ export const categories: Category[] = [
     ],
   },
 
-  {
-    key: "ecommerce",
-    label: {
-      en: "E-commerce",
-      pt: "E-commerce",
-    },
-    projects: [],
-  },
+  // {
+  //   key: "ecommerce",
+  //   label: {
+  //     en: "E-commerce",
+  //     pt: "E-commerce",
+  //   },
+  //   projects: [],
+  // },
 
   {
     key: "mobile-app",

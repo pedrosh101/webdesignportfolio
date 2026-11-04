@@ -2,7 +2,7 @@
 
 import { useLocale } from "next-intl";
 
-type Social = { instagram: string; youtube: string; linkedin: string };
+type Social = { instagram: string; youtube: string; linkedin: string; whatsapp: string };
 
 const CV = {
   pt: { label: "Currículo", file: "Currículo - Pedro Henrique Lima.pdf" },
@@ -24,6 +24,7 @@ export default function SocialLinks({
   const links = [
     // { label: social.instagram, href: "#" },
     // { label: social.youtube, href: "#" },
+    { label: social.whatsapp, href: "https://wa.me/5538998162313" },
     {
       label: social.linkedin,
       href: "https://www.linkedin.com/in/pedrohenriquedasilvalima/",

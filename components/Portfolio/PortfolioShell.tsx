@@ -18,7 +18,7 @@ type Copy = {
   menu: string;
   close: string;
   aboutLabel: string;
-  social: { instagram: string; youtube: string; linkedin: string };
+  social: { instagram: string; youtube: string; linkedin: string; whatsapp: string };
 };
 
 function Tagline({

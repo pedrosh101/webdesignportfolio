@@ -18,7 +18,6 @@ type Props = {
   }>;
 };
 
-// Pré-gera /pt e /en (e, nas páginas filhas, cada projeto) em vez de renderizar sob demanda.
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -53,7 +52,6 @@ export default async function LocaleLayout({ children, params }: Props) {
     notFound();
   }
 
-  // Necessário para as páginas serem geradas estaticamente com next-intl.
   setRequestLocale(locale);
 
   const messages = await getMessages();
@@ -71,6 +69,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       instagram: t('social.instagram'),
       youtube: t('social.youtube'),
       linkedin: t('social.linkedin'),
+      whatsapp: t('social.whatsapp'),
     },
   };
 
@@ -78,7 +77,6 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          {/* A sidebar vive aqui: não desmonta ao navegar entre as páginas filhas. */}
           <PortfolioShell copy={copy}>{children}</PortfolioShell>
         </NextIntlClientProvider>
       </body>

@@ -18,7 +18,12 @@ type Copy = {
   menu: string;
   close: string;
   aboutLabel: string;
-  social: { instagram: string; youtube: string; linkedin: string; whatsapp: string };
+  social: {
+    instagram: string;
+    youtube: string;
+    linkedin: string;
+    whatsapp: string;
+  };
 };
 
 function Tagline({
@@ -77,7 +82,6 @@ export default function PortfolioShell({
     if (activeCategoryKey) setExpandedCategory(activeCategoryKey);
   }
 
-  // Fecha o menu mobile sempre que a página muda (inclusive voltar/avançar do navegador).
   const [menuPathname, setMenuPathname] = useState(pathname);
   if (menuPathname !== pathname) {
     setMenuPathname(pathname);

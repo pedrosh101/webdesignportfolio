@@ -24,8 +24,6 @@ function BlockRenderer({ block, locale }: { block: Block; locale: Locale }) {
         </h3>
       );
 
-
-
     case "paragraph":
       return (
         <p className="2xl:max-w-[102ch] w-full text-base leading-relaxed text-[#3a372f] m-0">
